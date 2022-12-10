@@ -23,7 +23,7 @@ fn main() {
         expression = "+".to_owned() + expression.as_str();
     }
 
-    let mut result: i32 = 0;
+    let mut result: f32 = 0.0;
 
     let first_actions = re_split(expression.as_str(), re_first_actions);
 
@@ -48,13 +48,13 @@ fn main() {
 fn calculate_subexpression(
     numbers: Vec<String>, 
     operators: Vec<String>
-) -> i32 {
+) -> f32 {
 
     let first_number: String = operators[0].to_owned() + numbers[0].as_str();
-    let mut subresult: i32 = first_number.parse::<i32>().unwrap();
+    let mut subresult: f32 = first_number.parse::<f32>().unwrap();
 
     for i in 1..operators.len() {
-        let number = numbers[i].parse::<i32>().unwrap();
+        let number = numbers[i].parse::<f32>().unwrap();
         let action_result = match_numbers(subresult, number, &operators[i]);
         subresult = action_result;
     }
@@ -64,10 +64,10 @@ fn calculate_subexpression(
 }
 
 fn match_numbers(
-    first_number: i32,
-    second_number: i32, 
+    first_number: f32,
+    second_number: f32, 
     operator: &String
-) -> i32 {
+) -> f32 {
 
     match operator.as_str() {
         "+" => return first_number + second_number,
